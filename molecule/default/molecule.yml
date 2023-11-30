@@ -4,7 +4,7 @@ dependency:
 driver:
   name: vagrant
 platforms:
-  - name: zabbix
+  - name: sshd-test
     box: generic/rocky8
     memory: 2048
     cpus: 2
