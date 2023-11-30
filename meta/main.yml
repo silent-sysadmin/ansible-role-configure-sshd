@@ -1,7 +1,7 @@
 galaxy_info:
   author: wmcd
   description: Applies baseline sshd configuration for enterprise linux hosts
-  role_name: configure-sshd
+  role_name: configure_sshd
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
