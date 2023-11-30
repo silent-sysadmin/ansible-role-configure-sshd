@@ -1,2 +1,8 @@
 ---
 # handlers file for ansible-role-configure-sshd
+- name: Restart sshd
+  when:
+    - ansible_facts['os_family'] == "RedHat"
+  ansible.builtin.systemd_service:
+    name: sshd.service
+    state: restarted
