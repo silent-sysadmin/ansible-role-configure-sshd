@@ -1,38 +1,70 @@
 Ansible Role - Configure SSH
 =========
 
-Applies baseline sshd configuration for enterprise linux hosts
+Applies baseline sshd configuration for enterprise linux hosts.
+
+- Will eventually be compliant with CIS SSH benchmarks for popular platforms
+- Dynamically define configuration parameteres as well as the banner.
+
+the banner (issue.j2) contains a header, body, and footer used for structuring and easily updating various components such as including logos, contact info, etc.
+
+Configurations are currently intrapolated and are not validated. Ensure correct configuration parameters are passed to the role in order to prevent accidental lockouts!
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+For testing, molecule, vagrant, and libvirt provider is required.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+configure_sshd_banner_header: |
+  *******************************************************************************
+           UNAUTHORIZED ACCESS IS PROHIBITED! CLOSE YOUR CONNECTION NOW!                     
+  *******************************************************************************
+
+configure_sshd_banner_body: |
+  {{ configure_sshd_organization_name }} - All Rights Reserved
+  
+  This computer system is under the ownership of The Pharm, LLC. Which contains
+  confidential corporate information. Unauthorized Access to this computer 
+  system(s) or the data contained herein or in transit to/from this system is 
+  prohibited! All interactions with this computer are monitored, recorded, and 
+  subject to audit. Unauthorized access to this computer is subject to 
+  disciplinary action, civil or criminal charges. Evidence may be provided to
+  law enforcement.
+
+configure_sshd_banner_footer: |
+  By continuing, you consent to these terms.
+
+configure_sshd_organization_name: "silentsysadmin.com"
+
+# In the future, sshd_config options will be specified below
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No third party role dependencies are used at this time. 
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+roles:
+  - role: silent-sysadmin.configure_sshd
+    vars:
+      configure_sshd_organizaiton_name: "generic ltd"
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+silentsysadmin.com
