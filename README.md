@@ -19,13 +19,13 @@ Role Variables
 --------------
 
 ```
-configure_sshd_banner_header: |
+sshd_banner_header: |
   *******************************************************************************
            UNAUTHORIZED ACCESS IS PROHIBITED! CLOSE YOUR CONNECTION NOW!                     
   *******************************************************************************
 
-configure_sshd_banner_body: |
-  {{ configure_sshd_organization_name }} - All Rights Reserved
+sshd_banner_body: |
+  {{ sshd_organization_name }} - All Rights Reserved
   
   This computer system is under the ownership of The Pharm, LLC. Which contains
   confidential corporate information. Unauthorized Access to this computer 
@@ -35,10 +35,10 @@ configure_sshd_banner_body: |
   disciplinary action, civil or criminal charges. Evidence may be provided to
   law enforcement.
 
-configure_sshd_banner_footer: |
+sshd_banner_footer: |
   By continuing, you consent to these terms.
 
-configure_sshd_organization_name: "silentsysadmin.com"
+sshd_organization_name: "silentsysadmin.com"
 
 # In the future, sshd_config options will be specified below
 ```
@@ -53,9 +53,9 @@ Example Playbook
 
 ```
 roles:
-  - role: silent-sysadmin.configure_sshd
+  - role: silent-sysadmin.sshd
     vars:
-      configure_sshd_organizaiton_name: "generic ltd"
+      sshd_organizaiton_name: "generic ltd"
 
 ```
 
