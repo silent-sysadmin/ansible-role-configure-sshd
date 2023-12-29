@@ -5,7 +5,7 @@
   when:
     - ansible_facts['os_family'] == "RedHat"
   block:
-    - name: Insure sshd is installed and running on the hosts
+    - name: Ensure sshd is installed and running on the hosts
       ansible.builtin.dnf:
         name: 
           - openssh-server
@@ -22,21 +22,10 @@
         backup: true
       register: sshd_copy
       notify: Restart sshd
-    
-    - name: Configure issue banner for host
-      ansible.builtin.copy:
-        src: "templates/issue.j2"
-        dest: "/etc/issue"
-        mode: '0644'
-        owner: root
-        group: root
-        setype: "etc_t"
-        backup: true
-      register: issue_copy
 
     - name: Configure issue.net banner for host
-      ansible.builtin.copy:
-        src: "templates/issue.net.j2"
+      ansible.builtin.template:
+        src: "templates/issue.j2"
         dest: "/etc/issue.net"
         mode: '0644'
         owner: root
